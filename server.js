@@ -4,6 +4,7 @@ const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const admin = require('firebase-admin');
 const ejs = require('ejs');
+const cors = require('cors'); // Add this line for CORS
 
 
 const app = express();
@@ -26,6 +27,11 @@ app.use(session({
   resave: false,
   saveUninitialized: true,
 }));
+app.use(cors({
+  origin: 'https://test-0ohy.onrender.com', // Replace with your frontend origin
+  // Other CORS options
+}));
+app.use(cors());
 
 // Serve signup page with Firebase Phone Auth
 app.get('/signup', (req, res) => {
